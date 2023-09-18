@@ -86,7 +86,37 @@
     }
 
     ?>
-    
+    <h2>Ejercicio 4</h2>
+    <p>Crear un arreglo cuyos índices van de 97 a 122 y cuyos valores son las letras de la ‘a’
+    a la ‘z’. Usa la función chr(n) que devuelve el caracter cuyo código ASCII es n para poner
+    el valor en cada índice. Es decir:</p>
+    <pre>
+        [97] => a
+        [98] => b
+        [99] => c
+    </pre>
+    <p>Crea el arreglo con un ciclo for</p>
+    <p>Lee el arreglo y crea una tabla en XHTML con echo y un ciclo foreach</p>
+    <?php
 
+        $arreglo = array();
+
+        for ($c_ascii = 97; $c_ascii <= 122; $c_ascii++) {
+            //chr() se usa para convertir un número  de código ASCII (que se encuentra en $arreglo) en el carácter correspondiente. 
+            $arreglo[$c_ascii] = chr($c_ascii); 
+        }
+
+        echo '<table border="1">';
+        echo "<tr>";
+        echo '<td>Índice</td><td>Letra </td>';
+        echo "</tr>";
+        foreach ($arreglo as $arr_indice => $arreglo) {
+            echo "<tr>";
+            echo "<td>$arr_indice</td><td>$arreglo</td>";
+            echo "</tr>";
+        }
+
+        echo '</table>';
+    ?>
 </body>
 </head>
