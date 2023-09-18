@@ -130,19 +130,18 @@
 
     <form action="index.php" method="post">
         <label for="edad">Indique su edad: </label>
-        <input type="number" id="edad" name="edad">
+        <input type="number" id="edad" name="edad" required>
         <br>
         <label for="sexo">Indique su sexo: </label>
-        <input type="text" id="sexo" name="sexo">
+        <input type="text" id="sexo" name="sexo" required>
         <br>
         <input type="submit" value="Enviar">
     </form>
 
     <?php
-
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $edad = ($_POST["edad"]);
-        $sexo = ($_POST["sexo"]);
+        $edad = $_POST["edad"];
+        $sexo = $_POST["sexo"];
 
         if($edad >= 18 && $edad <= 35 && $sexo == "femenino"){
             echo "Bienvenida, usted está en el rango de edad permitido.<br>";
@@ -152,6 +151,301 @@
         }
         echo "Edad: $edad<br>";
         echo "Sexo: $sexo<br>";
+    }
+    ?>
+    <h2>Ejercicio 6</h2>
+    <p>Crea en código duro un arreglo asociativo que sirva para registrar el parque vehicular de
+    una ciudad. Cada vehículo debe ser identificado por:</p>
+    <pre>
+        * Matricula
+        * Auto
+            - Marca
+            - Modelo (año)
+            - Tipo (sedan|hachback|camioneta)
+        * Propietario 
+            - Nombre 
+            - Ciudad 
+            - Dirección
+    </pre>
+    <p>La matrícula debe tener el siguiente formato LLLNNNN, donde las L pueden ser letras de
+    la A-Z y las N pueden ser números de 0-9.</p>
+    <p>Para hacer esto toma en cuenta las siguientes instrucciones:</p>
+    <ul>
+        <li>Crea en código duro el registro para 15 autos</li>
+        <li>Utiliza un único arreglo, cuya clave de cada registro sea la matricula</li>
+        <li>Lógicamente la matricula no se puede repetir.</li>
+        <li>Los datos del Auto deben ir dentro de un arreglo.</li>
+        <li>Los datos del Propietario deben ir dentro de un arreglo.</li>
+    </ul>
+    <p>Usa print_r para mostrar la estructura general del arreglo, que luciría de forma similar al
+    siguiente ejemplo:</p>
+    <pre>
+    Array ( [UBN6338] => Array ( [Auto] => Array ( [marca] => HONDA [modelo] => 2020
+    [tipo] => camioneta ) [Propietario] => Array ( [nombre] => Alfonzo Esparza [ciudad]
+    => Puebla, Pue. [direccion] => C.U., Jardines de San Manuel ) ) [UBN6339] => Array
+    ( [Auto] => Array ( [marca] => MAZDA [modelo] => 2019 [tipo] => sedan ) [Propietario]
+    => Array ( [nombre] => Ma. del Consuelo Molina [ciudad] => Puebla, Pue. [direccion]
+    => 97 oriente ) ) )
+    </pre>
+    <p>Escrito de forma más ordenada:</p>
+    <pre>
+    Array (
+    [UBN6338] =>
+        Array (
+            [Auto] => Array (
+                [marca] => HONDA [modelo] => 2020 [tipo] => camioneta
+            )
+            [Propietario] => Array (
+                [nombre] => Alfonzo Esparza [ciudad] => Puebla, Pue. [direccion]
+                => C.U., Jardines de San Manuel
+        )
+    )
+    [UBN6339] =>
+        Array (
+            [Auto] => Array (
+                [marca] => MAZDA [modelo] => 2019 [tipo] => sedan
+            )
+            [Propietario] => Array (
+                [nombre] => Ma. del Consuelo Molina [ciudad] => Puebla, Pue.
+            [direccion] => 97 oriente
+            )
+        )
+    )
+    </pre>
+    <p>Finalmente crea un formulario simple donde puedas consultar la información:</p>
+    <ul>
+        <li>Por matricula de auto.</li>
+        <li>De todos los autos registrados.</li>
+    </ul>
+
+    <?php
+        $registro = array();
+        //----------------------1------------------------
+        $registro['ABC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Chevrolet",
+                'Modelo'  => "2010",
+                'Tipo'  => "Camioneta"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Axel Luna Gomez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Circuito San Pablo II"
+            )
+        ); 
+         //----------------------2------------------------
+         $registro['BBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Audi",
+                'Modelo'  => "2015",
+                'Tipo'  => "Familiar "
+            ),
+            'Propietario' => array(
+                'Nombre' => "Juan Pérez García",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Calle Primavera #123"
+            )
+        );        
+        //----------------------3------------------------
+        $registro['CBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Nissan",
+                'Modelo'  => "2013",
+                'Tipo'  => "Coupe"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Luis González Martínez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Carrera 7 #890"
+            )
+        );
+        //----------------------4------------------------
+        $registro['DBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Nissan",
+                'Modelo'  => "2023",
+                'Tipo'  => "Camioneta"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Ana Martínez Rodríguez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Paseo de la Luna #2345"
+            )
+        ); 
+        //----------------------5------------------------
+        $registro['EBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "BMW",
+                'Modelo'  => "2017",
+                'Tipo'  => "Deportivo"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Carlos López Sánchez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Avenida Principal #6789"
+            )
+        ); 
+        //----------------------6------------------------
+        $registro['FBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Audi",
+                'Modelo'  => "2014",
+                'Tipo'  => "Camioneta"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Laura González Pérez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Callejón de las Flores #1011"
+            )
+        ); 
+        //----------------------7------------------------
+        $registro['GBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Chevrolet",
+                'Modelo'  => "2015",
+                'Tipo'  => "Coupe"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Pedro Sánchez Fernández",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Boulevard de los Pájaros #1213"
+            )
+        ); 
+        //----------------------8------------------------
+        $registro['HBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Audi",
+                'Modelo'  => "2011",
+                'Tipo'  => "Camioneta"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Teresa Ramírez Gonzáleza",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Camino del Bosque #1415"
+            )
+        ); 
+        //----------------------9------------------------
+        $registro['IBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Ford",
+                'Modelo'  => "2012",
+                'Tipo'  => "Familiar "
+            ),
+            'Propietario' => array(
+                'Nombre' => "Javier Fernández López",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Calle del Mar #1617"
+            )
+        ); 
+        //----------------------10------------------------
+        $registro['JBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Ford",
+                'Modelo'  => "2019",
+                'Tipo'  => "Deportivo"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Rosa Torres Pérez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Ruta del Río #1819"
+            )
+        ); 
+        //----------------------11------------------------
+        $registro['KBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Toyota",
+                'Modelo'  => "2020",
+                'Tipo'  => "Camioneta"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Alejandro Ruiz Martínez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Avenida de las Montañas #2021"
+            )
+        ); 
+        //----------------------12------------------------
+        $registro['LBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Audi",
+                'Modelo'  => "2015",
+                'Tipo'  => "Convertible"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Carmen Vargas Rodríguez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Callejuela de la Playa #2223"
+            )
+        ); 
+        //----------------------13------------------------
+        $registro['MBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Ford",
+                'Modelo'  => "2010",
+                'Tipo'  => "Familiar "
+            ),
+            'Propietario' => array(
+                'Nombre' => "Sergio Jiménez López",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Paseo de los Cerezos #2425"
+            )
+        ); 
+        //----------------------14------------------------
+        $registro['NBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Audi",
+                'Modelo'  => "2018",
+                'Tipo'  => "Coupe"
+            ),
+            'Propietario' => array(
+                'Nombre' => "Isabel Mendoza García",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Carretera Vieja #2627"
+            )
+        ); 
+        //----------------------15------------------------
+        $registro['OBC1234'] = array(
+            'Auto' => array(
+                'Marca' => "Toyota",
+                'Modelo'  => "2016",
+                'Tipo'  => "Familiar "
+            ),
+            'Propietario' => array(
+                'Nombre' => "Manuel Castro Ramírez",
+                'Ciudad'  => "Puebla",
+                'Direccion'  => "Camino del Arco Iris #2829"
+            )
+        ); 
+
+        echo "Impresión del arreglo<pre>";
+        print_r($registro);
+        echo "</pre>";
+    ?>;
+    <form method="post" action="index.php">
+        <label for="matricula">Matrícula del Auto:</label>
+        <input type="text" id="matricula" name="matricula">
+        <input type="submit" value="Consultar">
+    </form>
+    <?php
+        $ban2=true;
+        $matricula="11111";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $matricula=($_POST["matricula"]);
+           // if (isset($registro[$matricula])) {
+           //     print_r($registro[$matricula]);
+          //  } 
+          foreach ($registro as $matricula_ => $info) {
+            if($matricula == $matricula_){
+                echo "Informacion la matricula  $matricula_:";
+                echo "<pre>";
+                print_r($info);
+                echo "</pre>";
+                $ban2 = true;
+                break;
+            }else{
+                echo "La matricula $matricula_ no se encuentra en le registro";
+                $ban2 = false;
+            }
+        }
     }
     ?>
 </body>
