@@ -55,5 +55,38 @@
         echo "Número de iteraciones: $iteraciones<br>";
         echo "Total de números generados: $total_num<br>"
     ?>
+     <h2>Ejercicio 3</h2>
+    <p>Utiliza un ciclo while para encontrar el primer número entero obtenido aleatoriamente,
+    pero que además sea múltiplo de un número dado.</p>
+    <p>Crear una variante de este script utilizando el ciclo do-while.</p>
+    <p>El número dado se debe obtener vía GET.</p>
+
+    <?php
+     if (isset($_GET['numero2'])) {
+        $num = $_GET['numero2'];
+
+
+        $numeroalt = rand(1, 100); 
+
+        echo "Número aleatorio generado: $numeroalt <br>";
+        echo "Número Ingresado: $num <br> ";
+
+        $esMultiplo = true;
+
+        do {
+            if ($num % $numeroalt === 0) {
+                $esMultiplo = false;
+                echo "<p>$num es un múltiplo de $numeroalt</p>";
+            }
+            else{
+                $numeroalt = rand(1, 100);
+            }
+
+        } while ($esMultiplo);
+    }
+
+    ?>
+    
+
 </body>
 </head>
